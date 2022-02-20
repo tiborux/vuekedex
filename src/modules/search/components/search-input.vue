@@ -1,58 +1,55 @@
 <template>
   <input
-      v-model="query"
-      @input="updateQuery"
-      class="search-input"
-      inputmode="search"
-      type="search"
+    v-model="query"
+    class="search-input"
+    inputmode="search"
+    type="search"
+    @input="updateQuery"
   />
 </template>
 
 <script setup lang="ts">
-import { onMounted, toRefs, watch } from 'vue';
-import { debounce } from '../../../utils/debounce';
-import { useSearchStore } from '../store/index';
-import { DebouncedFunction } from '../../../models/types';
+  import { onMounted, toRefs, watch } from 'vue';
+  import { debounce } from '../../../utils/debounce';
+  import { useSearchStore } from '../store/index';
+  import { DebouncedFunction } from '../../../utils/types';
 
-const searchStore = useSearchStore();
-const { query } = toRefs(searchStore.$state);
-
-let debouncedRequest: DebouncedFunction<[string]>;
-
-const { instantDebounceInMs } = withDefaults(
+  const props = withDefaults(
     defineProps<{
-      instantDebounceInMs: number;
+      instantDebounceInMs?: number;
     }>(),
     { instantDebounceInMs: 600 }
-);
+  );
 
-onMounted(() => {
-  searchStore.query = 'all';
-  searchStore.request();
-});
+  const searchStore = useSearchStore();
+  let debouncedRequest: DebouncedFunction<[string]>;
+  const { instantDebounceInMs } = toRefs(props);
+  const { query } = toRefs(searchStore.$state);
 
-watch(
+  onMounted(() => {
+    searchStore.request();
+  });
+
+  watch(
     () => searchStore.query,
-    query => {
-      if (query !== 'all') {
-        search();
-      }
+    () => {
+      search();
     }
-);
+  );
 
-function updateQuery(): void {
-  searchStore.query = query.value;
-}
-
-function search(): void {
-  if (query.value.length >= 2) {
-    if (!debouncedRequest) {
-      debouncedRequest = debounce(searchStore.requestFiltered, instantDebounceInMs);
-    }
-    searchStore.suggestions = searchStore.filteredPokemon;
-    debouncedRequest('');
-  } else {
-    searchStore.pokemonList = [];
+  function updateQuery(): void {
+    searchStore.query = query.value;
   }
-}
+
+  function search(): void {
+    if (query.value.length >= 2) {
+      if (!debouncedRequest) {
+        debouncedRequest = debounce(searchStore.requestFiltered, instantDebounceInMs.value);
+      }
+      searchStore.suggestions = searchStore.filteredPokemon;
+      debouncedRequest('');
+    } else {
+      searchStore.pokemonList = [];
+    }
+  }
 </script>

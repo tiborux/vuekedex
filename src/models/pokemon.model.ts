@@ -25,7 +25,6 @@ export interface PokemonModel {
   weight: number;
   /** A link to a list of location areas, as well as encounter details pertaining to specific versions */
   location_area_encounters: string;
-
   /** A set of sprites used to depict this Pokémon in the game.
    * A visual representation of the various sprites can be found at [PokeAPI/sprites](https://github.com/PokeAPI/sprites#sprites)
    */
@@ -56,6 +55,6 @@ export interface PokemonSprites {
   other: {
     'official-artwork': {
       front_default: string;
-    }
-  }
+    };
+  };
 }

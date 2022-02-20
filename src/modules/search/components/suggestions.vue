@@ -9,22 +9,27 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
+  import { computed, toRefs } from 'vue';
   import { PokemonModel } from '../../../models/pokemon.model';
   import { useSearchStore } from '../store/index';
   import List from './list.vue';
 
   const searchStore = useSearchStore();
 
-  const { maxItemsToRender } = withDefaults(
-      defineProps<{
-        maxItemsToRender: number;
-      }>(),
-      { maxItemsToRender: 8 }
+  const props = withDefaults(
+    defineProps<{
+      maxItemsToRender?: number;
+    }>(),
+    { maxItemsToRender: 8 }
   );
 
+  const { maxItemsToRender } = toRefs(props);
   /** List of Pokemon suggestions */
-  const suggestions = computed(() => searchStore.suggestions.slice(0, maxItemsToRender));
+  const suggestions = computed(() => {
+    return searchStore.query.length >= 2
+      ? searchStore.suggestions.slice(0, maxItemsToRender.value)
+      : [];
+  });
 
   /** Updates the query of the search with the value of the suggestion */
   function updateQuery(suggestion: PokemonModel): void {

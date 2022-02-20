@@ -24,7 +24,7 @@ export const useSearchStore = defineStore({
   actions: {
     request(url?: string) {
       api.get(url ?? basicUrl).then(async (response: any) => {
-        if (this.query === 'all') {
+        if (!url) {
           this.allPokemon = response.data.results;
         } else {
           this.pokemonList.push(response.data);

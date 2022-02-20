@@ -14,10 +14,10 @@
   .search {
     display: flex;
     position: relative;
-    align-items: center;
+    justify-content: center;
     .suggestions-list {
       position: absolute;
-      top: 30px;
+      top: 20px;
     }
   }
 </style>

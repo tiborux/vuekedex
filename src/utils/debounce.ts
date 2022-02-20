@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { DebouncedFunction, DebounceOptions } from '../models/types';
+import { DebouncedFunction, DebounceOptions } from './types';
 
 /**
  * Util function that returns a debounced version of the function passed as parameter. It can use

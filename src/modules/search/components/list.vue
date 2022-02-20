@@ -7,14 +7,14 @@
 </template>
 
 <script setup lang="ts">
-  const { items } = defineProps<{
-    items: any[];
+  defineProps<{
+    items: Record<'id', number>[];
   }>();
 </script>
 
 <style lang="scss">
- .items-list {
-   padding: 0;
-   list-style: none;
- }
+  .items-list {
+    padding: 0;
+    list-style: none;
+  }
 </style>
