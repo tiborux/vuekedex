@@ -10,11 +10,16 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted } from 'vue';
   import { PokemonModel } from '../../../models/pokemon.model';
 
-  defineProps<{
+  const { pokemon } =defineProps<{
     pokemon: PokemonModel;
   }>();
+
+  onMounted(()=>{
+    console.log(pokemon);
+  })
 </script>
 
 <style lang="scss">
