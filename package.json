@@ -1,0 +1,30 @@
+{
+  "name": "pokedex",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.vue --ignore-path .gitignore --fix src"
+  },
+  "dependencies": {
+    "axios": "~0.21.1",
+    "axios-cache-adapter": "^2.7.3",
+    "pinia": "^2.0.11",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "~12.12.0",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-vue": "^8.4.1",
+    "prettier": "2.5.1",
+    "sass": "~1.49.8",
+    "sass-loader": "~12.6.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vue-tsc": "^0.29.8"
+  }
+}
