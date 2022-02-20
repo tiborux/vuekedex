@@ -23,12 +23,15 @@
     { maxItemsToRender: 8 }
   );
 
-  const { maxItemsToRender } = toRefs(props);
   /** List of Pokemon suggestions */
+  const { maxItemsToRender } = toRefs(props);
+
+  /** List of Pokemon suggestions
+   *
+   * @return suggestions - The list of suggestions shifted by the maxItemsToRender.
+   * */
   const suggestions = computed(() => {
-    return searchStore.query.length >= 2
-      ? searchStore.suggestions.slice(0, maxItemsToRender.value)
-      : [];
+    return searchStore.suggestions.slice(0, maxItemsToRender.value);
   });
 
   /** Updates the query of the search with the value of the suggestion */

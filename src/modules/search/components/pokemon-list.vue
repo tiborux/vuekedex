@@ -1,5 +1,5 @@
 <template>
-  <List :items="pokemonList" class="pokemon-list">
+  <List :items="matchedPokemon" class="pokemon-list">
     <template #default="{ item }">
       <Pokemon :pokemon="item" />
     </template>
@@ -15,7 +15,7 @@
   const searchStore = useSearchStore();
 
   /** List of Pokemon filtered by the query */
-  const pokemonList = computed(() => searchStore.pokemonList);
+  const matchedPokemon = computed(() => searchStore.matchedPokemon);
 </script>
 
 <style>

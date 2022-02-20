@@ -11,6 +11,7 @@
 <script setup lang="ts">
   import { onMounted, toRefs, watch } from 'vue';
   import { debounce } from '../../../utils/debounce';
+  import { requestEachPokemon } from '../store/actions/request-each-pokemon.action';
   import { useSearchStore } from '../store/index';
   import { DebouncedFunction } from '../../../utils/types';
 
@@ -44,12 +45,11 @@
   function search(): void {
     if (query.value.length >= 2) {
       if (!debouncedRequest) {
-        debouncedRequest = debounce(searchStore.requestFiltered, instantDebounceInMs.value);
+        debouncedRequest = debounce(searchStore.requestEachPokemon, instantDebounceInMs.value);
       }
-      searchStore.suggestions = searchStore.filteredPokemon;
       debouncedRequest('');
     } else {
-      searchStore.pokemonList = [];
+      searchStore.matchedPokemon = [];
     }
   }
 </script>
